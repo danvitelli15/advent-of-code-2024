@@ -37,7 +37,7 @@ const main = () => {
   const outputPart2 = solvePart2(input);
   Deno.writeFileSync(\`${
     import.meta.dirname
-  }/output.txt\`, encoder.encode(\`Output Part 1: \${outputPart1}\\nOutput Part 2: \${outputPart2}\`));
+  }/output.txt\`, encoder.encode(\`Part 1: \${outputPart1}\\Part 2: \${outputPart2}\`));
 }
 
 main();`)
