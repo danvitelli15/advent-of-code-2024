@@ -1,3 +1,5 @@
+import { htmlToMd } from "./html-to-md/html-to-md.ts";
+
 const encoder = new TextEncoder();
 const day = Deno.args[0];
 
@@ -6,20 +8,7 @@ const dayDir = `./day-${day}`;
 Deno.mkdirSync(dayDir);
 const descriptionRespoinse = await fetch(`https://adventofcode.com/2024/day/${day}`).then((res) => res.text());
 
-const description = descriptionRespoinse
-  .match(/<article[^>]*>([\s\S]*?)<\/article>/)?.[1]
-  .replaceAll(/<h2>/g, "# ")
-  .replaceAll(/<\/h2>/g, "\n")
-  .replaceAll(/<p>/g, "\n")
-  .replaceAll(/<\/p>/g, "")
-  .replaceAll(/<pre><code>/g, "```\n")
-  .replaceAll(/<\/code><\/pre>/g, "```")
-  .replaceAll(/<code>/g, "`")
-  .replaceAll(/<\/code>/g, "`")
-  .replaceAll(/<em>/g, "*")
-  .replaceAll(/<\/em>/g, "*")
-  .replaceAll(/<li>/g, "- ")
-  .replaceAll(/<\/?[^>]+>/g, "");
+const description = htmlToMd(descriptionRespoinse);
 Deno.writeTextFileSync(`${dayDir}/readme.md`, description || "");
 
 Deno.writeFileSync(`${dayDir}/input.txt`, encoder.encode("input text here"));
