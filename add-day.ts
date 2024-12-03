@@ -29,13 +29,17 @@ Deno.writeFileSync(
   const output = "";
   console.log(input);
   return output;
-};
-
+};`)
+);
+Deno.writeFileSync(
+  `${dayDir}/main.ts`,
+  encoder.encode(`import { solve } from './solution.ts';
+    
 const main = () => {
   const encoder = new TextEncoder();
-  const input = Deno.readTextFileSync('./input.txt');
+  const input = Deno.readTextFileSync(\`${import.meta.dirname}/input.txt\`);
   const output = solve(input);
-  Deno.writeFileSync('./output.txt', encoder.encode(output));
+  Deno.writeFileSync(\`${import.meta.dirname}/output.txt\`, encoder.encode(output));
 }
 
 main();`)
