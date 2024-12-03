@@ -47,8 +47,10 @@ Deno.writeFileSync(
     `import { assertEquals } from '@std/assert';
 import { solve } from './solution.ts';
 
+const testInput = \`\`;
+
 Deno.test('Day ${day}', () => {
-  assertEquals(solve('example input'), 'expected output');
+  assertEquals(solve(testInput), 'expected output');
 });`
   )
 );
