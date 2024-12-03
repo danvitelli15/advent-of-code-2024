@@ -15,7 +15,8 @@ Throughout the Chief's office, the historically significant locations are listed
 There's just one problem: by holding the two lists up *side by side* (your puzzle input), it quickly becomes clear that the lists aren't very similar. Maybe you can help The Historians reconcile their lists?
 
 For example:
-```3   4
+```
+3   4
 4   3
 2   5
 1   3
