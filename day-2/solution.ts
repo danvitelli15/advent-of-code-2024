@@ -48,5 +48,28 @@ export const solvePart1 = (input: string) => {
 
 export const solvePart2 = (input: string) => {
   const reports = parseReports(input);
-  return "output";
+
+  const safeCount = reports.reduce((safeCount, report) => {
+    if (reportIsSafe(report)) {
+      return (safeCount += 1);
+    } else {
+      const ifRemoved = report.map((_, i) => {
+        const newReport = report.slice();
+        newReport.splice(i, 1);
+        if (reportIsSafe(newReport)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+      if (ifRemoved.includes(true)) {
+        return (safeCount += 1);
+      }
+
+      return safeCount;
+    }
+  }, 0);
+
+  return safeCount.toString();
 };

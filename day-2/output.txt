@@ -1,2 +1,2 @@
 Part 1: 432
-Part 2: output
+Part 2: 488

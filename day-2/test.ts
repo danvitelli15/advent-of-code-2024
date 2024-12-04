@@ -36,6 +36,6 @@ Deno.test("Day 2 - Part 1 - Records all increase by 1, 2, or 3", () => {
   assertEquals(reportIsSafe([1, 3, 6, 7, 9]), true);
 });
 
-Deno.test("Day 2 - Part 2", () => {
-  assertEquals(solvePart2(testInput), "expected output");
+Deno.test("Day 2 - Part 2 - should be 4 safe records", () => {
+  assertEquals(solvePart2(testInput), "4");
 });
