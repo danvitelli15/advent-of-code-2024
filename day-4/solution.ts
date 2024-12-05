@@ -52,5 +52,39 @@ export const solvePart1 = (input: string) => {
 };
 
 export const solvePart2 = (input: string) => {
-  return "output";
+  const searchGrid = parseInput(input);
+
+  const letterACords = searchGrid.reduce((cords, row, rowIndex) => {
+    const xIndexes = row.reduce((yCords, cell, cellIndex) => {
+      if (cell === "A") {
+        yCords.push(cellIndex);
+      }
+      return yCords;
+    }, new Array<number>());
+    return cords.concat(xIndexes.map((y) => [rowIndex, y]));
+  }, new Array<[number, number]>());
+
+  const xStringSets = letterACords.reduce((xStringSets, aCords) => {
+    const [centerX, centerY] = aCords;
+    const downLeft = pullStringFromGrid(
+      searchGrid,
+      [centerX + directions.upRight[0], centerY + directions.upRight[1]],
+      directions.downLeft,
+      3
+    );
+    const downRight = pullStringFromGrid(
+      searchGrid,
+      [centerX + directions.upLeft[0], centerY + directions.upLeft[1]],
+      directions.downRight,
+      3
+    );
+    xStringSets.push([downLeft, downRight]);
+    return xStringSets;
+  }, new Array<[string, string]>());
+
+  const masXs = xStringSets.filter(
+    (set) => (set[0] === "MAS" || set[0] === "SAM") && (set[1] === "MAS" || set[1] === "SAM")
+  ).length;
+
+  return masXs.toString();
 };
